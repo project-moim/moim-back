@@ -10,8 +10,18 @@ import javax.persistence.Id;
 @Getter
 @NoArgsConstructor
 public class Hashtag {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
     private String text;
+
+    public void update(String text) {
+        this.text = text;
+    }
+
+    @Builder
+    public Hashtag(String text) {
+        this.text = text;
+    }
 }

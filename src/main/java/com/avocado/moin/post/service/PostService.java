@@ -2,15 +2,17 @@ package com.avocado.moin.post.service;
 
 
 import com.avocado.moin.post.dto.PostAddDto;
+import com.avocado.moin.post.dto.PostResponseDto;
 import com.avocado.moin.post.dto.PostUpdateDto;
 import com.avocado.moin.post.domain.Post;
 import com.avocado.moin.post.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -37,6 +39,7 @@ public class PostService {
     }
 
 
+    @Transactional
     public void delPost(Long id) {
         log.info("delete Sns by Id {}.", id);
         try {
@@ -46,8 +49,16 @@ public class PostService {
         }
     }
 
+    @Transactional(readOnly = true)
     public List<Post> findAllPost() {
         return postRepository.findAll();
     }
 
+    @Transactional(readOnly = true)
+    public PostResponseDto findById(Long id) {
+        log.info("find by post id : {}", id);
+        Post post = postRepository.findById(id).orElseThrow(()-> new IllegalArgumentException("해당 게시글이 없습니다. id ="+ id));
+
+        return new PostResponseDto(post);
+    }
 }

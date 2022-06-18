@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 public class PostAddDto {
 
     private Long id;
+    private Long userId;
     private String title;
     private String content;
     private String location;
@@ -23,7 +24,8 @@ public class PostAddDto {
     }
 
     @Builder
-    public PostAddDto(String title, String content, String location) {
+    public PostAddDto(Long userId, String title, String content, String location) {
+        this.userId = userId;
         this.title = title;
         this.content = content;
         this.location = location;

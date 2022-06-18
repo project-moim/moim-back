@@ -20,6 +20,10 @@ public class Comment extends UtilTimeSetter {
     private Long postId;
     private String content;
 
+    public void update(String content){
+        this.content = content;
+    }
+
     @Builder
     public Comment(Long userId, Long postId, String content) {
         this.userId = userId;

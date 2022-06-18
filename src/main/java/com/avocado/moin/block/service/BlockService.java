@@ -2,11 +2,14 @@ package com.avocado.moin.block.service;
 
 import com.avocado.moin.block.domain.Block;
 import com.avocado.moin.block.repository.BlockRepository;
+import com.avocado.moin.post.domain.Post;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
+
+import java.util.List;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -23,6 +26,11 @@ public class BlockService {
         }catch (Exception e){
             log.error("error : {}", e.getMessage());
         }
+    }
+
+    @Transactional(readOnly = true)
+    public List<Block> findAllBlock() {
+        return blockRepository.findAll();
     }
 
     @Transactional

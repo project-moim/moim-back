@@ -2,8 +2,11 @@ package com.avocado.moin.block.controller;
 
 import com.avocado.moin.block.domain.Block;
 import com.avocado.moin.block.service.BlockService;
+import com.avocado.moin.post.domain.Post;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
@@ -15,6 +18,11 @@ public class BlockController {
     @PostMapping("/block")
     public void saveBlock(@RequestBody Block block){
         blockService.addBlock(block);
+    }
+
+    @GetMapping("/block")
+    public List<Block> findAllPost() {
+        return blockService.findAllBlock();
     }
 
     @DeleteMapping("/block/{id}")

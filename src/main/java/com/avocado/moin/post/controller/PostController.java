@@ -1,6 +1,7 @@
 package com.avocado.moin.post.controller;
 
 import com.avocado.moin.post.dto.PostAddDto;
+import com.avocado.moin.post.dto.PostResponseDto;
 import com.avocado.moin.post.dto.PostUpdateDto;
 import com.avocado.moin.post.domain.Post;
 import com.avocado.moin.post.service.PostService;
@@ -29,6 +30,11 @@ public class PostController {
     @GetMapping("/post")
     public List<Post> findAllPost() {
         return postService.findAllPost();
+    }
+
+    @GetMapping("/post/{id}")
+    public PostResponseDto findById(@PathVariable Long id) {
+        return postService.findById(id);
     }
 
     @DeleteMapping("/post/{id}")
